@@ -1,6 +1,7 @@
 <?php
 
-public function save(){
-	return 1;
+public function index(){
+echo 1;
+
 	
-}
+?>
