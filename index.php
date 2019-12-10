@@ -1,32 +1,34 @@
 <?php
  include 'header.php';
+ $url =   "../images/bg.jpg";
     $connection_obj = mysqli_connect("localhost","root","root","php");
         if (!$connection_obj) {
             echo "Error No: " . mysqli_connect_errno();
             echo "Error Description: " . mysqli_connect_error();
             exit;
         }
-         
         $query = "SELECT * FROM customer";
          
         $result = mysqli_query($connection_obj, $query) or die(mysqli_error($connection_obj));
         mysqli_close($connection_obj);
-
 ?>
 
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>ViewCustomer</title>
+       <link rel="stylesheet" media="screen" href="../css/index.css" />
+
+<title>ViewCustomer</title>
 </head>
+<style>
+
+</style>
 <body>
+
 	<div class="container">
-    <!--   <span class="close-btn">
+   <!--    <span class="brn-body">
         <img src="images/bg.jpg">
       </span> -->
       <h2>Customer Table</h2><br><br>
-          
       <table class="table">
       <button class="pull-right btn btn-primary"type="submit"><a href="addcustomer.php"></a>AddCustomer</button>
         <thead>
@@ -49,8 +51,8 @@
             <td><?php echo $row["firstname"] ?></td>
             <td><?php echo $row["lastname"] ?></td>
             <td><?php echo $row["email"] ?></td>
-            <td><button class="btn btn-primary"><a href="../customer/edit.php"></a>Edit</button></td>
-            <td><button class="btn btn-danger"><a href=""></a>Delete</button> </td>
+            <td><button class="btn btn-default"><a href="customer/edit.php?id='.$row[id].'">Edit</a></button></td>
+            <td><button class="btn btn-default"><a href="customer/delete.php?id='.$row['id'].'">Delete</a></button> </td>
           </tr>
         <?php $count++; }?>
         </tbody>
