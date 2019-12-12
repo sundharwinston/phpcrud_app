@@ -7,7 +7,7 @@
             echo "Error Description: " . mysqli_connect_error();
             exit;
         }
-        $query = "SELECT * FROM customer";
+       $query = "SELECT * FROM customer";
          
         $result = mysqli_query($connection_obj, $query) or die(mysqli_error($connection_obj));
         mysqli_close($connection_obj);
@@ -21,7 +21,7 @@
 </head>
 <style>
 
-</style>
+</style>  
 <body>
 
 	<div class="container">
@@ -30,7 +30,7 @@
       </span> -->
       <h2>Customer Table</h2><br><br>
       <table class="table">
-      <button class="pull-right btn btn-primary"type="submit"><a href="addcustomer.php"></a>AddCustomer</button>
+      <a class="pull-right btn btn-primary" href="addcustomer.php">AddCustomer</a>
         <thead>
           <tr>
             <th>S.No</th>
@@ -47,14 +47,13 @@
 
           while ($row = mysqli_fetch_array($result)){ ?>
        <tr>
-            <td><?php echo $count; ?></td>
             <td><?php echo $row["firstname"] ?></td>
             <td><?php echo $row["lastname"] ?></td>
             <td><?php echo $row["email"] ?></td>
-            <td><button class="btn btn-default"><a href="customer/edit.php?id='.$row[id].'">Edit</a></button></td>
-            <td><button class="btn btn-default"><a href="customer/delete.php?id='.$row['id'].'">Delete</a></button> </td>
+            <td><a class="btn btn-primary" href="customer/edit.php?id=<?php echo $row['id']; ?>">Edit</a></td>
+            <td><a class="btn btn-primary" href="customer/delete.php?id=<?php echo $row['id']; ?>">Delete</a></td>
           </tr>
-        <?php $count++; }?>
+        <?php }?>
         </tbody>
       </table>
 </div>

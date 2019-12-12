@@ -1,20 +1,22 @@
 <?php
-
-$con = mysqli_connect("localhost","root","root","php");
-
-
-echo $student_id = $_GET['id']; 
-$query = "SELECT * FROM customer WHERE id = '$student_id'"; 
-$result = mysql_query($query);
-$row = mysql_fetch_array($result);
-mysql_close();
-
+ include '../header.php';
+   $id = $_GET['id'];
+    $connection_obj = mysqli_connect("localhost","root","root","php");
+        if (!$connection_obj) {
+            echo "Error No: " . mysqli_connect_errno();
+            echo "Error Description: " . mysqli_connect_error();
+            exit;
+        }
+       $query = "SELECT * FROM customer   WHERE id=$id";
+         
+        $result = mysqli_query($connection_obj, $query) or die(mysqli_error($connection_obj));
 ?>
 
 
 
+<?php while ($row = mysqli_fetch_array($result)) {?>
 <div class="container">
-  <form action="edit.php" method="post">
+  <form action="update.php?id=<?php echo $row['id']; ?>" method="post">
     <div class="form-group">
       <label for="firstname">firstname:</label>
       <input type="firstname" name="firstname" value="<?php echo $row['firstname'] ?>" class="form-control" id="firstname">
@@ -37,3 +39,5 @@ mysql_close();
     <button type="submit" name="form_submit" class="btn btn-success">Submit</button>
   </form>
 </div>
+
+<?php }?>
